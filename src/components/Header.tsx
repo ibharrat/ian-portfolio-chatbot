@@ -90,9 +90,9 @@ export function Header({
                 AI Assistant
               </span>
             </div>
-            <p className="text-xs text-zinc-400 flex items-center gap-1.5 truncate max-w-[200px] sm:max-w-none">
+            <p className="text-xs text-zinc-400 flex items-center gap-1.5 truncate max-w-[240px] sm:max-w-none">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Open to Software & Cloud/DevOps Roles
+              Infrastructure • Data Analytics • Software Engineer
             </p>
           </div>
         </div>

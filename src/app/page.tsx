@@ -17,14 +17,15 @@ const INITIAL_WELCOME: MessageItem = {
   role: "assistant",
   content: `Hello! I'm **Ian Bharrat's AI Assistant**.
 
-I can answer any questions regarding Ian's professional background, including:
-- **Cloud & DevOps Experience**: AWS migration, CloudFormation, Terraform, Auto Scaling, Aurora Serverless.
-- **Academic Qualifications**: B.S. in Information Technology at Kean University (**3.96 GPA**), A.A.S. in Computer Science.
-- **Certifications**: AWS Certified Cloud Practitioner, CompTIA ITF+.
-- **Projects**: Modular Terraform AWS architecture, Space Run arcade game, and more.
-- **Contact & Availability**: How to schedule an interview or discuss DevOps / Software Engineering opportunities.
+I can answer any questions regarding Ian's background, qualifications, and career goals:
+- **Career Aspirations**: **Infrastructure**, **Data Analytics**, and **Software Engineering** (seeking full-time roles starting January 2027).
+- **Cloud Engineering Experience**: Cloud Engineer Intern at **Cintas** (refactored microservices on GCP, standardized Terraform, GitLab CI/CD, Shared VPCs).
+- **Data Analytics Projects**: **Python Movie Data Visualization** (Pandas & Matplotlib analysis on 45,000+ movies investigating production budget diminishing returns).
+- **Infrastructure as Code**: **HashiCorp Packer Golden AMI** automated pipeline for secure, immutable Amazon Linux base images.
+- **Academic Honors**: B.S. in Information Technology - Cybersecurity Option at Kean University (**3.97 GPA**, **Phi Kappa Phi Honors Society**).
+- **Certifications**: AWS Certified CloudOps Engineer – Associate, AWS Certified Cloud Practitioner, CompTIA ITF+.
 
-Feel free to ask a question below or click any of the suggested topics!`,
+Ask a question below or click any of the suggested topics!`,
   timestamp: "Just now",
 };
 
@@ -233,8 +234,8 @@ export default function Home() {
                   </h2>
                   <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
                     Powered by OpenAI and grounded in Ian&apos;s real-world cloud
-                    internships, Terraform architectures, Kean University
-                    coursework, and verified AWS certifications.
+                    internship at Cintas, data analytics projects, Kean University
+                    honors (3.97 GPA), and career aspirations in Infrastructure, Data Analytics, and Software Engineering.
                   </p>
                 </div>
               )}
@@ -282,27 +283,30 @@ export default function Home() {
                     Quick:
                   </span>
                   {[
-                    "AWS Internship",
-                    "3.96 GPA Details",
-                    "Terraform Project",
+                    "Career Aspirations",
+                    "Cintas GCP Internship",
+                    "Movie Data Viz",
+                    "Packer Golden AMI",
+                    "3.97 GPA & Honors",
                     "Certifications",
-                    "Contact Ian",
                   ].map((chip, idx) => (
                     <button
                       key={idx}
                       disabled={isLoading}
                       onClick={() => {
                         const prompts: Record<string, string> = {
-                          "AWS Internship":
-                            "Tell me more about Ian's Cloud Infrastructure Internship at Diamond Distribution.",
-                          "3.96 GPA Details":
-                            "What is Ian's GPA and academic coursework at Kean University?",
-                          "Terraform Project":
-                            "Explain the architecture of Ian's Terraform AWS project.",
+                          "Career Aspirations":
+                            "What are Ian's career aspirations in Infrastructure, Data Analytics, and Software Engineering?",
+                          "Cintas GCP Internship":
+                            "Tell me about Ian's Cloud Engineer Internship at Cintas and his work with GCP and Terraform.",
+                          "Movie Data Viz":
+                            "Explain Ian's Python Movie Data Visualization project analyzing 45,000+ Kaggle movies.",
+                          "Packer Golden AMI":
+                            "How did Ian build the HashiCorp Packer automated Golden AMI pipeline?",
+                          "3.97 GPA & Honors":
+                            "What is Ian's GPA and honors society membership at Kean University?",
                           Certifications:
                             "What certifications and Credly badges does Ian have?",
-                          "Contact Ian":
-                            "How can I reach out to Ian to discuss job opportunities?",
                         };
                         sendMessage(prompts[chip] || chip);
                       }}

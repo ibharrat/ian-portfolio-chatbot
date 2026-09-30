@@ -14,6 +14,7 @@ import {
   Sparkles,
   ChevronRight,
   X,
+  Target,
 } from "lucide-react";
 import { IAN_PROFILE } from "@/lib/ianData";
 
@@ -58,7 +59,7 @@ export function ProfileSidebar({
             </button>
           </div>
 
-          {/* Quick Bio Card */}
+          {/* Quick Bio & Aspirations Card */}
           <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800/90 space-y-3">
             <div className="flex items-start justify-between">
               <div>
@@ -71,11 +72,29 @@ export function ProfileSidebar({
                 </p>
               </div>
               <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 font-medium">
-                GPA 3.96
+                GPA 3.97
               </span>
             </div>
 
-            <p className="text-xs text-zinc-300 leading-relaxed">
+            <div className="pt-1">
+              <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                <Target className="w-3 h-3 text-emerald-400" /> Career Aspirations
+              </span>
+              <div className="flex flex-wrap gap-1">
+                {["Infrastructure", "Data Analytics", "Software Engineer"].map(
+                  (role, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2 py-0.5 rounded-md bg-zinc-800/80 border border-zinc-700/60 text-[11px] text-zinc-200"
+                    >
+                      {role}
+                    </span>
+                  )
+                )}
+              </div>
+            </div>
+
+            <p className="text-xs text-zinc-300 leading-relaxed pt-1">
               {IAN_PROFILE.bio}
             </p>
 
@@ -106,7 +125,7 @@ export function ProfileSidebar({
               </h4>
               <button
                 onClick={() =>
-                  onSelectPrompt("What is Ian's educational background and GPA?")
+                  onSelectPrompt("What is Ian's educational background, GPA, and honors at Kean University?")
                 }
                 className="text-[11px] text-zinc-400 hover:text-zinc-200 flex items-center gap-0.5 transition-colors"
               >
@@ -122,23 +141,19 @@ export function ProfileSidebar({
                 >
                   <div className="flex items-start justify-between gap-1">
                     <span className="font-medium text-zinc-200">{edu.degree}</span>
-                    <span className="text-[10px] text-emerald-400 font-mono shrink-0">
-                      {edu.gpa}
-                    </span>
+                    {edu.gpa && (
+                      <span className="text-[10px] text-emerald-400 font-mono shrink-0">
+                        {edu.gpa}
+                      </span>
+                    )}
                   </div>
                   <div className="text-zinc-400 mt-0.5">
                     {edu.institution} • {edu.gradDate}
                   </div>
-                  {edu.coursework && (
-                    <div className="mt-2 pt-2 border-t border-zinc-800/40 flex flex-wrap gap-1">
-                      {edu.coursework.slice(0, 4).map((c, i) => (
-                        <span
-                          key={i}
-                          className="px-1.5 py-0.5 rounded bg-zinc-800/60 text-[10px] text-zinc-300"
-                        >
-                          {c}
-                        </span>
-                      ))}
+                  {edu.honors && (
+                    <div className="mt-2 pt-1.5 border-t border-zinc-800/40 text-[11px] text-zinc-300 flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-emerald-400" />
+                      <span>{edu.honors}</span>
                     </div>
                   )}
                 </div>
@@ -175,7 +190,7 @@ export function ProfileSidebar({
                     <div className="font-medium text-zinc-200">{cert.name}</div>
                     <div className="text-[11px] text-zinc-400">{cert.issuer}</div>
                   </div>
-                  {cert.badgeUrl && (
+                  {cert.badgeUrl ? (
                     <a
                       href={cert.badgeUrl}
                       target="_blank"
@@ -185,7 +200,7 @@ export function ProfileSidebar({
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
-                  )}
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -201,7 +216,7 @@ export function ProfileSidebar({
               <button
                 onClick={() =>
                   onSelectPrompt(
-                    "Describe Ian's cloud internship experience at Diamond Distribution Inc."
+                    "Describe Ian's Cloud Engineer Internship at Cintas and what he achieved with GCP and Terraform."
                   )
                 }
                 className="text-[11px] text-zinc-400 hover:text-zinc-200 flex items-center gap-0.5 transition-colors"
@@ -219,7 +234,9 @@ export function ProfileSidebar({
                   <div className="font-medium text-zinc-200">{exp.role}</div>
                   <span className="text-[10px] text-zinc-400">{exp.period}</span>
                 </div>
-                <div className="text-zinc-400 text-[11px]">{exp.company}</div>
+                <div className="text-zinc-400 text-[11px]">
+                  {exp.company} • {exp.location}
+                </div>
                 <p className="text-zinc-300 text-[11px] line-clamp-2">
                   {exp.highlights[0]}
                 </p>
@@ -232,12 +249,12 @@ export function ProfileSidebar({
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5 text-zinc-400" />
-                Featured Projects
+                Relevant Projects
               </h4>
               <button
                 onClick={() =>
                   onSelectPrompt(
-                    "Tell me about the Terraform AWS Web Infrastructure project Ian created."
+                    "Tell me about Ian's Python Movie Data Visualization and HashiCorp Packer projects."
                   )
                 }
                 className="text-[11px] text-zinc-400 hover:text-zinc-200 flex items-center gap-0.5 transition-colors"
@@ -254,9 +271,9 @@ export function ProfileSidebar({
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-zinc-200">{proj.title}</span>
-                    {proj.githubUrl && (
+                    {proj.websiteUrl && (
                       <a
-                        href={proj.githubUrl}
+                        href={proj.websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-400 hover:text-white transition-colors"
@@ -265,11 +282,11 @@ export function ProfileSidebar({
                       </a>
                     )}
                   </div>
-                  <div className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
+                  <div className="text-[11px] text-zinc-400 mt-0.5 line-clamp-2">
                     {proj.description}
                   </div>
                   <div className="mt-1.5 flex flex-wrap gap-1">
-                    {proj.techStack.slice(0, 3).map((t, i) => (
+                    {proj.techStack.slice(0, 4).map((t, i) => (
                       <span
                         key={i}
                         className="px-1.5 py-0.5 rounded bg-zinc-800/80 text-[10px] text-zinc-300 font-mono"
@@ -291,19 +308,21 @@ export function ProfileSidebar({
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {[
-                "AWS",
-                "Terraform",
-                "CloudFormation",
                 "Python",
-                "Java",
-                "JavaScript",
-                "TypeScript",
-                "React / Next.js",
+                "SQL",
+                "Pandas",
+                "NumPy",
+                "Matplotlib",
+                "GCP (BigQuery)",
+                "Vertex AI",
+                "AWS (S3, SageMaker)",
+                "Terraform",
+                "dbt",
+                "Airflow",
                 "Docker",
-                "Aurora Serverless",
-                "PostgreSQL",
-                "MongoDB",
-                "CI/CD",
+                "Kubernetes",
+                "GitLab CI/CD",
+                "Go",
                 "Linux",
               ].map((skill, i) => (
                 <button

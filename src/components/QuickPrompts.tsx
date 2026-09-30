@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Cloud, GraduationCap, Terminal, Award, Gamepad2, Send } from "lucide-react";
+import { Cloud, GraduationCap, Terminal, Award, BarChart3, Target } from "lucide-react";
 
 interface QuickPromptsProps {
   onSelectPrompt: (prompt: string) => void;
@@ -9,40 +9,40 @@ interface QuickPromptsProps {
 
 export const PROMPT_CARDS = [
   {
+    icon: Target,
+    title: "Career Aspirations",
+    prompt: "What are Ian's career aspirations across Infrastructure, Data Analytics, and Software Engineering?",
+    description: "Infrastructure, Data Analytics, and Software Engineer roles for 2027",
+  },
+  {
     icon: Cloud,
-    title: "AWS & Cloud Migration",
-    prompt: "Tell me about Ian's cloud internship at Diamond Distribution and his AWS experience.",
-    description: "CloudFormation, EC2 ASG, ALB, Aurora, S3, CloudFront",
+    title: "Cintas Cloud Internship",
+    prompt: "Tell me about Ian's Cloud Engineer Internship at Cintas and his work with GCP and Terraform.",
+    description: "GCP microservices, GitLab CI/CD, Terraform, Shared VPCs",
+  },
+  {
+    icon: BarChart3,
+    title: "Movie Data Analytics",
+    prompt: "Explain Ian's Python Movie Data Visualization project and his findings on budget diminishing returns.",
+    description: "45,000+ Kaggle movies, Pandas, NumPy, Matplotlib analysis",
   },
   {
     icon: Terminal,
-    title: "Terraform Infrastructure",
-    prompt: "How did Ian architect his Terraform AWS Web Infrastructure project?",
-    description: "Modular HCL, SSM golden AMI, multi-AZ high availability",
+    title: "HashiCorp Packer Project",
+    prompt: "How did Ian build the HashiCorp Packer automated Golden AMI pipeline?",
+    description: "Immutable Amazon Linux images, IaC, security baselines",
   },
   {
     icon: GraduationCap,
-    title: "Education & 3.96 GPA",
-    prompt: "What is Ian's education, GPA at Kean University, and relevant coursework?",
-    description: "B.S. IT (3.96 GPA) & A.A.S. Computer Science",
+    title: "Kean Univ & 3.97 GPA",
+    prompt: "What is Ian's education, GPA (3.97/4.0), and honors society membership at Kean University?",
+    description: "B.S. IT (Cybersecurity Option), Phi Kappa Phi Honors",
   },
   {
     icon: Award,
     title: "Certifications",
-    prompt: "What certifications does Ian hold and what are his Credly links?",
-    description: "AWS Certified Cloud Practitioner, CompTIA ITF+",
-  },
-  {
-    icon: Gamepad2,
-    title: "Full-Stack Project",
-    prompt: "Tell me about Ian's Space Run arcade game project and tech stack.",
-    description: "Phaser JS, HTML5, CSS3, Node.js, MongoDB",
-  },
-  {
-    icon: Send,
-    title: "Contact & Availability",
-    prompt: "What roles is Ian looking for and how can I contact him for an interview?",
-    description: "Email, Phone, LinkedIn, GitHub details",
+    prompt: "What certifications does Ian hold and what are his Credly credentials?",
+    description: "AWS CloudOps Engineer, Cloud Practitioner, CompTIA ITF+",
   },
 ];
 
