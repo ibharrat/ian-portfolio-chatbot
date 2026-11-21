@@ -1,21 +1,31 @@
-# Ian Bharrat — AI Portfolio Chatbot 🤖
+# Ian Bharrat - Portfolio Chatbot
 
-A sleek, modern, dark-themed AI assistant that answers questions about **Ian Bharrat**'s background, cloud engineering experience, data analytics projects, Kean University education (3.97 GPA), and career aspirations in Infrastructure, Data Analytics, and Software Engineering.
+An AI assistant that answers questions about Ian Bharrat's background, experience, projects, and skills.
 
----
+Live: https://ian-portfolio-chatbot.vercel.app/
 
-## 🌟 Highlights
+## Tech Stack
 
-- **⚡ Live Streaming**: Real-time responses powered by OpenAI (`gpt-4o-mini`).
-- **🖤 Black-on-Black Aesthetic**: Sleek monochromatic dark interface with high readability.
-- **🎯 Accurate & Grounded**: Answers questions about Ian's Cloud Engineer Internship at Cintas (GCP, Terraform, GitLab CI/CD), Python Movie Data Visualization project, HashiCorp Packer Golden AMI, and verified certifications.
-- **📱 Responsive & Interactive**: Includes topic suggestion cards, a slide-out profile overview, and interactive controls.
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- OpenAI API
 
----
+## Setup
 
-## 🛠️ Tech Stack
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- **Next.js 14** (App Router & React)
-- **Tailwind CSS**
-- **OpenAI API**
-- **TypeScript**
+2. Add environment variables to `.env.local`:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key
+   OPENAI_MODEL=gpt-4o-mini
+   ```
+
+3. Run dev server:
+   ```bash
+   npm run dev
+   ```
