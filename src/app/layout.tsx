@@ -15,17 +15,15 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Ian Bharrat | Interactive AI Portfolio & Resume Assistant",
+  title: "Ian Bharrat | Portfolio AI Assistant",
   description:
-    "Ask questions about Ian Bharrat's experience, AWS cloud infrastructure projects, certifications, technical skills, and background.",
+    "Ask questions about Ian Bharrat's background, cloud experience, data analytics projects, and career aspirations.",
   keywords: [
     "Ian Bharrat",
     "Cloud Engineer",
     "DevOps",
-    "AWS Certified",
     "Terraform",
-    "Kean University",
-    "Portfolio AI",
+    "Data Analytics",
     "Software Engineer",
   ],
   authors: [{ name: "Ian Bharrat" }],
@@ -37,9 +35,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark bg-black">
+    <html lang="en" className="dark bg-[#121212]">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-zinc-100 min-h-screen selection:bg-zinc-800 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#121212] text-zinc-300 min-h-screen selection:bg-zinc-800 selection:text-zinc-200`}
       >
         {children}
       </body>

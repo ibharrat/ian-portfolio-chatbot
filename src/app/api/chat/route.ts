@@ -2,18 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { SYSTEM_PROMPT } from "@/lib/ianData";
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
-});
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
       return NextResponse.json(
         {
           error:
-            "OpenAI API key is missing. Please ensure OPENAI_API_KEY is configured in your .env file.",
+            "OpenAI API key is missing. Please ensure OPENAI_API_KEY is configured in your environment.",
         },
         { status: 500 }
       );
@@ -27,6 +25,9 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Initialize OpenAI client inside request handler
+    const openai = new OpenAI({ apiKey });
 
     // Prepare message history with SYSTEM_PROMPT prepended
     const conversation = [

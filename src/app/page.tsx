@@ -1,31 +1,25 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Send,
-  Square,
-  Trash2,
-  ArrowDown,
-} from "lucide-react";
+import { Send, Square, ArrowDown } from "lucide-react";
 import { Header } from "@/components/Header";
 import { ProfileSidebar } from "@/components/ProfileSidebar";
 import { ChatMessage, MessageItem } from "@/components/ChatMessage";
-import { QuickPrompts } from "@/components/QuickPrompts";
 
 const INITIAL_WELCOME: MessageItem = {
   id: "welcome-message",
   role: "assistant",
   content: `Hello! I'm **Ian Bharrat's AI Assistant**.
 
-I can answer any questions regarding Ian's background, qualifications, and career goals:
-- **Career Aspirations**: **Infrastructure**, **Data Analytics**, and **Software Engineering** (seeking full-time roles starting January 2027).
-- **Cloud Engineering Experience**: Cloud Engineer Intern at **Cintas** (refactored microservices on GCP, standardized Terraform, GitLab CI/CD, Shared VPCs).
-- **Data Analytics Projects**: **Python Movie Data Visualization** (Pandas & Matplotlib analysis on 45,000+ movies investigating production budget diminishing returns).
-- **Infrastructure as Code**: **HashiCorp Packer Golden AMI** automated pipeline for secure, immutable Amazon Linux base images.
-- **Academic Honors**: B.S. in Information Technology - Cybersecurity Option at Kean University (**3.97 GPA**, **Phi Kappa Phi Honors Society**).
+I can answer questions regarding Ian's background, qualifications, and career goals:
+- **Career Aspirations**: Infrastructure, Data Analytics, and Software Engineering (seeking full-time roles starting January 2027).
+- **Cloud Engineering Experience**: Cloud Engineer Intern at Cintas (microservices on GCP, Terraform, GitLab CI/CD, Shared VPCs).
+- **Data Analytics Projects**: Python Movie Data Visualization (Pandas & Matplotlib analysis on 45,000+ movies investigating budget diminishing returns).
+- **Infrastructure as Code**: HashiCorp Packer automated Golden AMI pipeline for Amazon Linux base images.
+- **Academic Honors**: B.S. in Information Technology - Cybersecurity Option at Kean University (3.97 GPA, Phi Kappa Phi).
 - **Certifications**: AWS Certified CloudOps Engineer – Associate, AWS Certified Cloud Practitioner, CompTIA ITF+.
 
-Ask a question below or click any of the suggested topics!`,
+Ask a question below to get started.`,
   timestamp: "Just now",
 };
 
@@ -50,7 +44,7 @@ export default function Home() {
     scrollToBottom("smooth");
   }, [messages, isLoading]);
 
-  // Monitor scroll position to show "scroll to bottom" button
+  // Monitor scroll position
   const handleScroll = () => {
     if (!chatContainerRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
@@ -94,7 +88,6 @@ export default function Home() {
 
     setIsLoading(true);
 
-    // Placeholder assistant message for streaming
     const assistantId = (Date.now() + 1).toString();
     const assistantPlaceholder: MessageItem = {
       id: assistantId,
@@ -108,12 +101,10 @@ export default function Home() {
 
     setMessages((prev) => [...prev, assistantPlaceholder]);
 
-    // Create AbortController for stream cancellation
     const controller = new AbortController();
     abortControllerRef.current = controller;
 
     try {
-      // Exclude initial welcome message from API context to save tokens and keep context fresh
       const apiMessages = newMessages
         .filter((m) => m.id !== "welcome-message")
         .map((m) => ({
@@ -166,7 +157,7 @@ export default function Home() {
             msg.id === assistantId
               ? {
                   ...msg,
-                  content: `⚠️ **Connection Error**: ${errorMessage}\n\nPlease check your connection or verify the OpenAI API key in your \`.env\` file.`,
+                  content: `Connection Error: ${errorMessage}. Please verify the OpenAI API key in your environment.`,
                 }
               : msg
           )
@@ -199,7 +190,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-black text-zinc-100 overflow-hidden font-sans">
+    <div className="flex flex-col h-screen bg-[#121212] text-zinc-300 overflow-hidden font-sans">
       {/* Top Header */}
       <Header
         sidebarOpen={sidebarOpen}
@@ -208,34 +199,25 @@ export default function Home() {
         hasMessages={messages.length > 1}
       />
 
-      {/* Main Layout Container */}
+      {/* Main Container */}
       <div className="flex flex-1 overflow-hidden relative">
         {/* Chat Area */}
-        <main className="flex-1 flex flex-col h-full bg-gradient-to-b from-black via-zinc-950 to-black relative">
-          {/* Subtle Ambient Radial Lighting */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.07),rgba(255,255,255,0))]" />
-
+        <main className="flex-1 flex flex-col h-full bg-[#121212] relative">
           {/* Messages Scroll Area */}
           <div
             ref={chatContainerRef}
             onScroll={handleScroll}
             className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 scroll-smooth"
           >
-            <div className="max-w-4xl mx-auto space-y-6">
-              {/* Quick Hero Banner if only welcome message */}
+            <div className="max-w-3xl mx-auto space-y-5">
+              {/* Minimal Hero Header if only welcome message */}
               {messages.length === 1 && (
-                <div className="pt-2 pb-4 text-center space-y-3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-300">
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-400"></span>
-                    Interactive Resume & Portfolio
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                    Ask me anything about Ian Bharrat
+                <div className="pt-2 pb-2 text-center space-y-2">
+                  <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-200">
+                    Ian Bharrat — Portfolio Assistant
                   </h2>
-                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
-                    Powered by OpenAI and grounded in Ian&apos;s real-world cloud
-                    internship at Cintas, data analytics projects, Kean University
-                    honors (3.97 GPA), and career aspirations in Infrastructure, Data Analytics, and Software Engineering.
+                  <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
+                    Ask about Ian&apos;s cloud engineering experience at Cintas, data analytics projects, education, and career aspirations.
                   </p>
                 </div>
               )}
@@ -252,108 +234,51 @@ export default function Home() {
                 );
               })}
 
-              {/* Quick Prompt Cards when only 1 or 2 messages */}
-              {messages.length <= 2 && !isLoading && (
-                <div className="pt-4 pb-2">
-                  <QuickPrompts onSelectPrompt={(prompt) => sendMessage(prompt)} />
-                </div>
-              )}
-
               <div ref={messagesEndRef} />
             </div>
           </div>
 
-          {/* Scroll to bottom floating button */}
+          {/* Scroll to bottom button */}
           {showScrollBottom && (
             <button
               onClick={() => scrollToBottom("smooth")}
-              className="absolute bottom-28 right-6 z-20 p-2 rounded-full bg-zinc-900/90 border border-zinc-700 text-zinc-300 hover:text-white shadow-xl hover:bg-zinc-800 transition-all"
+              className="absolute bottom-24 right-6 z-20 p-2 rounded-full bg-[#1c1c1c] border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-[#252525] transition-colors"
             >
               <ArrowDown className="w-4 h-4" />
             </button>
           )}
 
-          {/* Input Area */}
-          <div className="p-4 sm:p-5 border-t border-zinc-800/80 bg-black/90 backdrop-blur-xl">
-            <div className="max-w-4xl mx-auto space-y-2.5">
-              {/* Quick Prompt Chips (when in deep conversation) */}
-              {messages.length > 2 && (
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-none text-xs">
-                  <span className="text-zinc-400 font-mono text-[11px] shrink-0 mr-1">
-                    Quick:
-                  </span>
-                  {[
-                    "Career Aspirations",
-                    "Cintas GCP Internship",
-                    "Movie Data Viz",
-                    "Packer Golden AMI",
-                    "3.97 GPA & Honors",
-                    "Certifications",
-                  ].map((chip, idx) => (
-                    <button
-                      key={idx}
-                      disabled={isLoading}
-                      onClick={() => {
-                        const prompts: Record<string, string> = {
-                          "Career Aspirations":
-                            "What are Ian's career aspirations in Infrastructure, Data Analytics, and Software Engineering?",
-                          "Cintas GCP Internship":
-                            "Tell me about Ian's Cloud Engineer Internship at Cintas and his work with GCP and Terraform.",
-                          "Movie Data Viz":
-                            "Explain Ian's Python Movie Data Visualization project analyzing 45,000+ Kaggle movies.",
-                          "Packer Golden AMI":
-                            "How did Ian build the HashiCorp Packer automated Golden AMI pipeline?",
-                          "3.97 GPA & Honors":
-                            "What is Ian's GPA and honors society membership at Kean University?",
-                          Certifications:
-                            "What certifications and Credly badges does Ian have?",
-                        };
-                        sendMessage(prompts[chip] || chip);
-                      }}
-                      className="px-2.5 py-1 rounded-full bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-all shrink-0 text-[11px] disabled:opacity-50"
-                    >
-                      {chip}
-                    </button>
-                  ))}
-                  <button
-                    onClick={clearChat}
-                    title="Reset conversation"
-                    className="ml-auto px-2 py-1 rounded-md text-[11px] text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 border border-transparent hover:border-zinc-800 transition-all flex items-center gap-1 shrink-0"
-                  >
-                    <Trash2 className="w-3 h-3" />
-                    <span>Clear</span>
-                  </button>
-                </div>
-              )}
-
-              {/* Text Input Container */}
-              <div className="relative flex items-end rounded-2xl bg-zinc-900/90 border border-zinc-800 focus-within:border-zinc-600 focus-within:ring-1 focus-within:ring-zinc-600 transition-all shadow-inner">
+          {/* Input Area - Solid opaque matte bar */}
+          <div className="p-4 sm:p-5 border-t border-[#262626] bg-[#161616]">
+            <div className="max-w-3xl mx-auto space-y-2">
+              {/* Text Input Box */}
+              <div className="relative flex items-end rounded-xl bg-[#1c1c1c] border border-[#2a2a2a] focus-within:border-zinc-500 transition-colors">
                 <textarea
                   ref={textareaRef}
                   value={input}
                   onChange={handleTextareaChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask a question about Ian's cloud experience, education, or projects..."
+                  placeholder="Ask a question about Ian's experience or background..."
                   rows={1}
                   disabled={isLoading}
-                  className="w-full resize-none bg-transparent py-3.5 pl-4 pr-24 text-sm text-zinc-100 placeholder-zinc-400 focus:outline-none max-h-44 disabled:opacity-60"
+                  className="w-full resize-none bg-transparent py-3 pl-4 pr-24 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none max-h-44 disabled:opacity-60"
                 />
 
-                <div className="absolute right-2.5 bottom-2.5 flex items-center gap-1.5">
+                <div className="absolute right-2 bottom-2 flex items-center gap-1.5">
                   {isLoading ? (
                     <button
                       onClick={stopGenerating}
                       title="Stop generating"
-                      className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors"
+                      className="p-1.5 rounded-lg bg-[#27272a] hover:bg-[#323238] text-zinc-300 transition-colors"
                     >
-                      <Square className="w-4 h-4 fill-zinc-200" />
+                      <Square className="w-4 h-4 fill-zinc-300" />
                     </button>
                   ) : (
                     <button
                       onClick={() => sendMessage()}
                       disabled={!input.trim()}
                       title="Send message (Enter)"
-                      className="p-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 disabled:opacity-30 disabled:hover:bg-zinc-100 transition-all shadow"
+                      className="p-1.5 rounded-lg bg-[#27272a] hover:bg-[#323238] text-zinc-200 border border-zinc-700/60 disabled:opacity-30 disabled:hover:bg-[#27272a] transition-colors"
                     >
                       <Send className="w-4 h-4" />
                     </button>
@@ -361,15 +286,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Footer notes */}
-              <div className="flex items-center justify-between text-[11px] text-zinc-400 px-1">
-                <span>
-                  Responses generated via OpenAI GPT model • Grounded in Ian&apos;s
-                  resume & LinkedIn
-                </span>
-                <span className="hidden sm:inline">
-                  Press <kbd className="px-1 py-0.5 rounded bg-zinc-900 border border-zinc-800 font-mono text-[10px]">Enter</kbd> to send
-                </span>
+              {/* Subtitle / Footer notes */}
+              <div className="flex items-center justify-between text-[11px] text-zinc-500 px-1">
+                <span>Grounded in Ian Bharrat&apos;s resume, projects, and credentials</span>
+                <span className="hidden sm:inline">Press Enter to send</span>
               </div>
             </div>
           </div>

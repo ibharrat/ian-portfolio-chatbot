@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #f4f4f5;
+  --background: #121212;
+  --foreground: #d4d4d8;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #121212;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -36,23 +36,22 @@ body {
 /* Text selection */
 ::selection {
   background: #27272a;
-  color: #fafafa;
+  color: #e4e4e7;
 }
 
-/* Glass & Surface styles */
+/* Solid Surface styles - no see-through / blur */
 .surface-card {
-  background: rgba(14, 14, 18, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #181818;
+  border: 1px solid #27272a;
 }
 
 .surface-hover {
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s ease;
 }
 
 .surface-hover:hover {
-  background: rgba(24, 24, 28, 0.85);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: #202020;
+  border-color: #3f3f46;
 }
 
 /* Blinking typing cursor */
@@ -71,9 +70,9 @@ body {
   animation: blink 1s infinite;
 }
 
-/* Markdown prose enhancements inside chat bubbles */
+/* Markdown prose inside chat bubbles */
 .prose-dark {
-  color: #e4e4e7;
+  color: #d4d4d8;
   font-size: 0.95rem;
   line-height: 1.65;
 }
@@ -97,25 +96,25 @@ body {
 }
 
 .prose-dark strong {
-  color: #ffffff;
+  color: #e4e4e7;
   font-weight: 600;
 }
 
 .prose-dark a {
-  color: #38bdf8;
+  color: #93c5fd;
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.15s ease;
 }
 
 .prose-dark a:hover {
-  color: #7dd3fc;
+  color: #bfdbfe;
 }
 
 .prose-dark code {
-  background: #18181b;
-  border: 1px solid #27272a;
-  color: #f43f5e;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #a1a1aa;
   padding: 0.15rem 0.35rem;
   border-radius: 0.375rem;
   font-size: 0.85em;
@@ -123,7 +122,7 @@ body {
 }
 
 .prose-dark pre {
-  background: #09090b;
+  background: #161616;
   border: 1px solid #27272a;
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
@@ -135,11 +134,11 @@ body {
   background: transparent;
   border: none;
   padding: 0;
-  color: #e4e4e7;
+  color: #d4d4d8;
 }
 
 .prose-dark h1, .prose-dark h2, .prose-dark h3, .prose-dark h4 {
-  color: #ffffff;
+  color: #e4e4e7;
   font-weight: 600;
   margin-top: 1rem;
   margin-bottom: 0.5rem;

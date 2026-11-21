@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { User, Sparkles, Copy, Check } from "lucide-react";
+import { Sparkles, Copy, Check } from "lucide-react";
 
 export interface MessageItem {
   id: string;
@@ -29,27 +29,27 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
 
   return (
     <div
-      className={`group flex gap-3.5 max-w-4xl w-full transition-opacity duration-200 ${
+      className={`group flex gap-3 max-w-3xl w-full transition-opacity ${
         isUser ? "ml-auto justify-end" : "mr-auto justify-start"
       }`}
     >
       {/* Assistant Avatar */}
       {!isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-300 mt-1 shadow-sm">
-          <Sparkles className="w-4 h-4 text-emerald-400" />
+        <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-[#1c1c1c] border border-[#282828] flex items-center justify-center text-zinc-400 mt-0.5">
+          <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
         </div>
       )}
 
-      {/* Message Content Bubble */}
+      {/* Message Bubble - Solid opaque matte backgrounds */}
       <div
-        className={`relative max-w-[88%] sm:max-w-[80%] rounded-2xl px-4 py-3.5 text-sm transition-all ${
+        className={`relative max-w-[88%] sm:max-w-[82%] rounded-2xl px-4 py-3 text-sm transition-all ${
           isUser
-            ? "bg-zinc-900 border border-zinc-800 text-zinc-100 rounded-tr-sm shadow-md"
-            : "bg-zinc-950/80 border border-zinc-850 text-zinc-200 rounded-tl-sm shadow-sm"
+            ? "bg-[#222222] border border-[#303030] text-zinc-200 rounded-tr-sm"
+            : "bg-[#181818] border border-[#262626] text-zinc-300 rounded-tl-sm"
         }`}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap leading-relaxed text-[0.95rem]">
+          <p className="whitespace-pre-wrap leading-relaxed text-[0.93rem]">
             {message.content}
           </p>
         ) : (
@@ -62,18 +62,18 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sky-400 hover:text-sky-300 underline font-medium transition-colors"
+                    className="text-sky-400 hover:text-sky-300 underline underline-offset-2 transition-colors"
                   >
                     {children}
                   </a>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc pl-5 my-2 space-y-1 text-zinc-200">
+                  <ul className="list-disc pl-5 my-2 space-y-1 text-zinc-300">
                     {children}
                   </ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal pl-5 my-2 space-y-1 text-zinc-200">
+                  <ol className="list-decimal pl-5 my-2 space-y-1 text-zinc-300">
                     {children}
                   </ol>
                 ),
@@ -81,12 +81,12 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
                   <li className="leading-relaxed">{children}</li>
                 ),
                 p: ({ children }) => (
-                  <p className="leading-relaxed mb-2.5 last:mb-0 text-zinc-200">
+                  <p className="leading-relaxed mb-2.5 last:mb-0 text-zinc-300">
                     {children}
                   </p>
                 ),
                 strong: ({ children }) => (
-                  <strong className="font-semibold text-white">
+                  <strong className="font-semibold text-zinc-100">
                     {children}
                   </strong>
                 ),
@@ -94,14 +94,14 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
                   const isInline = !className;
                   if (isInline) {
                     return (
-                      <code className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-emerald-400 font-mono text-[0.85em]">
+                      <code className="px-1.5 py-0.5 rounded bg-[#202020] border border-[#2a2a2a] text-zinc-300 font-mono text-[0.85em]">
                         {children}
                       </code>
                     );
                   }
                   return (
-                    <div className="my-2 rounded-lg overflow-hidden border border-zinc-800 bg-[#09090b]">
-                      <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-900/90 border-b border-zinc-800 text-xs text-zinc-400 font-mono">
+                    <div className="my-2 rounded-lg overflow-hidden border border-[#262626] bg-[#141414]">
+                      <div className="flex items-center justify-between px-3 py-1.5 bg-[#1a1a1a] border-b border-[#262626] text-xs text-zinc-400 font-mono">
                         <span>Code</span>
                       </div>
                       <pre className="p-3 text-xs font-mono text-zinc-300 overflow-x-auto">
@@ -119,9 +119,9 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
           </div>
         )}
 
-        {/* Message footer & actions */}
+        {/* Message footer & copy action */}
         <div
-          className={`flex items-center gap-2 mt-2 pt-1 text-[11px] text-zinc-400 ${
+          className={`flex items-center gap-2 mt-1.5 text-[11px] text-zinc-500 ${
             isUser ? "justify-end" : "justify-between"
           }`}
         >
@@ -130,13 +130,13 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
           {!isUser && !isStreaming && (
             <button
               onClick={copyContent}
-              title="Copy answer"
-              className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-[11px] text-zinc-400 hover:text-zinc-200 transition-opacity ml-auto"
+              title="Copy message"
+              className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-300 transition-opacity ml-auto"
             >
               {copied ? (
                 <>
-                  <Check className="w-3 h-3 text-emerald-400" />
-                  <span className="text-emerald-400">Copied</span>
+                  <Check className="w-3 h-3 text-zinc-400" />
+                  <span className="text-zinc-400">Copied</span>
                 </>
               ) : (
                 <>
@@ -148,13 +148,6 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
           )}
         </div>
       </div>
-
-      {/* User Avatar */}
-      {isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mt-1 shadow-sm">
-          <User className="w-4 h-4" />
-        </div>
-      )}
     </div>
   );
 }
