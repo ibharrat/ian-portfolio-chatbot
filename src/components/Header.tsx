@@ -67,24 +67,24 @@ export function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#262626] bg-[#161616]">
+    <header className="sticky top-0 z-40 w-full border-b border-[#341825] bg-[#1e0e15]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         {/* Left: Branding */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#202020] border border-[#2e2e2e] font-medium text-zinc-300 text-xs tracking-wider">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#25121b] border border-[#3d1e2d] font-medium text-[#dfd2d6] text-xs tracking-wider">
             IB
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-sm font-medium text-zinc-200 tracking-tight">
+              <h1 className="text-sm font-medium text-[#f0e6e9] tracking-tight">
                 {IAN_PROFILE.name}
               </h1>
-              <span className="hidden sm:inline-flex px-1.5 py-0.5 rounded text-[11px] bg-[#222222] border border-[#2a2a2a] text-zinc-400">
+              <span className="hidden sm:inline-flex px-1.5 py-0.5 rounded text-[11px] bg-[#25121b] border border-[#3d1e2d] text-[#a8919a]">
                 AI Assistant
               </span>
             </div>
-            <p className="text-[11px] text-zinc-500 truncate max-w-[200px] sm:max-w-none">
+            <p className="text-[11px] text-[#756168] truncate max-w-[200px] sm:max-w-none">
               Infrastructure • Data Analytics • Software Engineering
             </p>
           </div>
@@ -96,7 +96,7 @@ export function Header({
             <button
               onClick={onClearChat}
               title="Reset conversation"
-              className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg bg-[#202020] hover:bg-[#282828] border border-[#2e2e2e] text-zinc-400 hover:text-zinc-200 transition-colors"
+              className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg bg-[#25121b] hover:bg-[#321824] border border-[#3d1e2d] text-[#a8919a] hover:text-[#f0e6e9] transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Reset</span>
@@ -106,12 +106,12 @@ export function Header({
           <button
             onClick={copyEmail}
             title={copiedEmail ? "Copied!" : `Copy email: ${IAN_PROFILE.email}`}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg bg-[#202020] hover:bg-[#282828] border border-[#2e2e2e] text-zinc-300 hover:text-zinc-100 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg bg-[#25121b] hover:bg-[#321824] border border-[#3d1e2d] text-[#dfd2d6] hover:text-[#f0e6e9] transition-colors"
           >
             {copiedEmail ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-emerald-400 hidden sm:inline">Copied</span>
+                <Check className="w-3.5 h-3.5 text-[#f497a8]" />
+                <span className="text-[#f497a8] hidden sm:inline">Copied</span>
               </>
             ) : (
               <>
@@ -126,7 +126,7 @@ export function Header({
             target="_blank"
             rel="noopener noreferrer"
             title="LinkedIn Profile"
-            className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#202020] hover:bg-[#282828] border border-[#2e2e2e] text-zinc-400 hover:text-zinc-200 transition-colors"
+            className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#25121b] hover:bg-[#321824] border border-[#3d1e2d] text-[#a8919a] hover:text-[#f0e6e9] transition-colors"
           >
             <LinkedinIcon className="w-3.5 h-3.5" />
           </a>
@@ -136,7 +136,7 @@ export function Header({
             target="_blank"
             rel="noopener noreferrer"
             title="GitHub Profile"
-            className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#202020] hover:bg-[#282828] border border-[#2e2e2e] text-zinc-400 hover:text-zinc-200 transition-colors"
+            className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#25121b] hover:bg-[#321824] border border-[#3d1e2d] text-[#a8919a] hover:text-[#f0e6e9] transition-colors"
           >
             <GithubIcon className="w-3.5 h-3.5" />
           </a>
@@ -146,8 +146,8 @@ export function Header({
             title={sidebarOpen ? "Hide Profile" : "Show Profile"}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
               sidebarOpen
-                ? "bg-[#2a2a2a] border-zinc-600 text-zinc-200"
-                : "bg-[#202020] hover:bg-[#282828] border-[#2e2e2e] text-zinc-300"
+                ? "bg-[#3a1b2a] border-[#5e2b44] text-[#f0e6e9]"
+                : "bg-[#25121b] hover:bg-[#321824] border-[#3d1e2d] text-[#dfd2d6]"
             }`}
           >
             {sidebarOpen ? (

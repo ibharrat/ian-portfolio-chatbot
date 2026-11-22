@@ -190,7 +190,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#121212] text-zinc-300 overflow-hidden font-sans">
+    <div className="flex flex-col h-screen bg-[#160a0f] text-[#dfd2d6] overflow-hidden font-sans">
       {/* Top Header */}
       <Header
         sidebarOpen={sidebarOpen}
@@ -202,7 +202,7 @@ export default function Home() {
       {/* Main Container */}
       <div className="flex flex-1 overflow-hidden relative">
         {/* Chat Area */}
-        <main className="flex-1 flex flex-col h-full bg-[#121212] relative">
+        <main className="flex-1 flex flex-col h-full bg-[#160a0f] relative">
           {/* Messages Scroll Area */}
           <div
             ref={chatContainerRef}
@@ -213,10 +213,10 @@ export default function Home() {
               {/* Minimal Hero Header if only welcome message */}
               {messages.length === 1 && (
                 <div className="pt-2 pb-2 text-center space-y-2">
-                  <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-200">
+                  <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#f0e6e9]">
                     Ian Bharrat — Portfolio Assistant
                   </h2>
-                  <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#a8919a] max-w-lg mx-auto leading-relaxed">
                     Ask about Ian&apos;s cloud engineering experience at Cintas, data analytics projects, education, and career aspirations.
                   </p>
                 </div>
@@ -242,17 +242,17 @@ export default function Home() {
           {showScrollBottom && (
             <button
               onClick={() => scrollToBottom("smooth")}
-              className="absolute bottom-24 right-6 z-20 p-2 rounded-full bg-[#1c1c1c] border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-[#252525] transition-colors"
+              className="absolute bottom-24 right-6 z-20 p-2 rounded-full bg-[#25121b] border border-[#3d1e2d] text-[#dfd2d6] hover:text-[#f0e6e9] hover:bg-[#321824] transition-colors"
             >
               <ArrowDown className="w-4 h-4" />
             </button>
           )}
 
-          {/* Input Area - Solid opaque matte bar */}
-          <div className="p-4 sm:p-5 border-t border-[#262626] bg-[#161616]">
+          {/* Input Area - Solid opaque matte wine red bar */}
+          <div className="p-4 sm:p-5 border-t border-[#341825] bg-[#1e0e15]">
             <div className="max-w-3xl mx-auto space-y-2">
               {/* Text Input Box */}
-              <div className="relative flex items-end rounded-xl bg-[#1c1c1c] border border-[#2a2a2a] focus-within:border-zinc-500 transition-colors">
+              <div className="relative flex items-end rounded-xl bg-[#25121b] border border-[#3d1e2d] focus-within:border-[#632e47] transition-colors">
                 <textarea
                   ref={textareaRef}
                   value={input}
@@ -261,7 +261,7 @@ export default function Home() {
                   placeholder="Ask a question about Ian's experience or background..."
                   rows={1}
                   disabled={isLoading}
-                  className="w-full resize-none bg-transparent py-3 pl-4 pr-24 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none max-h-44 disabled:opacity-60"
+                  className="w-full resize-none bg-transparent py-3 pl-4 pr-24 text-sm text-[#dfd2d6] placeholder-[#756168] focus:outline-none max-h-44 disabled:opacity-60"
                 />
 
                 <div className="absolute right-2 bottom-2 flex items-center gap-1.5">
@@ -269,16 +269,16 @@ export default function Home() {
                     <button
                       onClick={stopGenerating}
                       title="Stop generating"
-                      className="p-1.5 rounded-lg bg-[#27272a] hover:bg-[#323238] text-zinc-300 transition-colors"
+                      className="p-1.5 rounded-lg bg-[#381c29] hover:bg-[#4a2436] text-[#dfd2d6] transition-colors"
                     >
-                      <Square className="w-4 h-4 fill-zinc-300" />
+                      <Square className="w-4 h-4 fill-[#dfd2d6]" />
                     </button>
                   ) : (
                     <button
                       onClick={() => sendMessage()}
                       disabled={!input.trim()}
                       title="Send message (Enter)"
-                      className="p-1.5 rounded-lg bg-[#27272a] hover:bg-[#323238] text-zinc-200 border border-zinc-700/60 disabled:opacity-30 disabled:hover:bg-[#27272a] transition-colors"
+                      className="p-1.5 rounded-lg bg-[#381c29] hover:bg-[#4a2436] text-[#f0e6e9] border border-[#52283d] disabled:opacity-30 disabled:hover:bg-[#381c29] transition-colors"
                     >
                       <Send className="w-4 h-4" />
                     </button>
@@ -287,7 +287,7 @@ export default function Home() {
               </div>
 
               {/* Subtitle / Footer notes */}
-              <div className="flex items-center justify-between text-[11px] text-zinc-500 px-1">
+              <div className="flex items-center justify-between text-[11px] text-[#756168] px-1">
                 <span>Grounded in Ian Bharrat&apos;s resume, projects, and credentials</span>
                 <span className="hidden sm:inline">Press Enter to send</span>
               </div>
