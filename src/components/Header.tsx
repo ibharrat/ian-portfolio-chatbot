@@ -85,7 +85,7 @@ export function Header({
               </span>
             </div>
             <p className="text-[11px] text-[#756168] truncate max-w-[200px] sm:max-w-none">
-              Infrastructure • Data Analytics • Software Engineering
+              Software Engineering • Infrastructure • Data Analytics
             </p>
           </div>
         </div>

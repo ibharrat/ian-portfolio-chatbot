@@ -34,19 +34,19 @@ export interface Certification {
 
 export const IAN_PROFILE = {
   name: "Ian Bharrat",
-  headline: "Aspiring Infrastructure, Data Analytics & Software Engineer",
+  headline: "Aspiring Software Engineer, Infrastructure & Data Analytics",
   location: "Manalapan, NJ 07726",
   email: "ian.bharrat@gmail.com",
   phone: "732-484-8378",
   linkedin: "https://www.linkedin.com/in/ian-bharrat/",
   github: "https://github.com/ibharrat",
-  availability: "Seeking full-time roles starting January 2027 in Infrastructure, Data Analytics, and Software Engineering",
-  bio: "Results-driven engineering student with hands-on experience in cloud environments (GCP, AWS), Infrastructure as Code (Terraform, Packer), and data pipelines. Strong foundation in predictive modeling, exploratory data analysis with Python (Pandas, Matplotlib), and cloud microservices. Passionate about pursuing high-impact opportunities in Infrastructure, Data Analytics, and Software Engineering.",
+  availability: "Seeking full-time roles starting January 2027 in Software Engineering, Infrastructure, and Data Analytics",
+  bio: "Results-driven engineering student with hands-on experience in software development, backend microservices, cloud environments (GCP, AWS), Infrastructure as Code (Terraform, Packer), and data pipelines. Strong foundation in software engineering with Python, Go, and JavaScript, predictive modeling, and cloud services. Primary focus and career goal is Software Engineering, alongside high-impact capabilities in Infrastructure and Data Analytics.",
 
   aspirations: [
+    "Software Engineering (Python, Go, JavaScript, Microservices, REST APIs)",
     "Infrastructure Engineering (Cloud, IaC, CI/CD, GCP, AWS, Kubernetes)",
     "Data Analytics & Pipelines (Python, SQL, BigQuery, dbt, Airflow, Tableau)",
-    "Software Engineering (Python, Go, JavaScript, Microservices, REST APIs)",
   ],
 
   education: [
@@ -200,10 +200,10 @@ You are the dedicated AI Assistant for Ian Bharrat's portfolio.
 Your role is to represent Ian Bharrat accurately, professionally, and engagingly based EXCLUSIVELY on his verified resume.
 
 # Core Career Aspirations
-When asked about Ian's interests, career goals, or the roles he is seeking, ALWAYS refer to his aspirations as:
-1. Infrastructure (Cloud Infrastructure, GCP, AWS, Terraform, Docker, Kubernetes, CI/CD, HashiCorp Packer)
-2. Data Analytics (Data Analysis, Python, SQL, Pandas, Matplotlib, BigQuery, dbt, Airflow, Tableau, Power BI)
-3. Software Engineer (Python, Go, JavaScript, Bash, Microservices, Backend Development)
+When asked about Ian's interests, career goals, or the roles he is seeking, ALWAYS emphasize Software Engineering as his primary target role, followed by Infrastructure and Data Analytics:
+1. Software Engineer (Primary Focus - Python, Go, JavaScript, Bash, Microservices, Backend Development, REST APIs)
+2. Infrastructure (Cloud Infrastructure, GCP, AWS, Terraform, Docker, Kubernetes, CI/CD, HashiCorp Packer)
+3. Data Analytics (Data Analysis, Python, SQL, Pandas, Matplotlib, BigQuery, dbt, Airflow, Tableau, Power BI)
 He is seeking full-time opportunities starting January 2027.
 
 # Contact Information
@@ -260,7 +260,7 @@ He is seeking full-time opportunities starting January 2027.
 
 # Communication Instructions:
 1. ONLY use the verified facts above. Do NOT mention outdated or previous positions like Diamond Distribution or Cotton-On.
-2. Expressly present Ian's career aspirations in three clear pillars: Infrastructure, Data Analytics, and Software Engineer.
+2. Expressly present Ian's career aspirations with Software Engineering as his primary target role, followed by Infrastructure and Data Analytics.
 3. Be professional, crisp, articulate, and friendly.
 4. When mentioning links, use standard markdown link formatting like [Link Name](url).
 5. If asked how to reach Ian, provide his email (ian.bharrat@gmail.com), phone (732-484-8378), LinkedIn (https://www.linkedin.com/in/ian-bharrat/), and GitHub (https://github.com/ibharrat).

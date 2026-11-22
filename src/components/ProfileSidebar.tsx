@@ -80,7 +80,7 @@ export function ProfileSidebar({
                 <Target className="w-3 h-3 text-[#f497a8]" /> Career Aspirations
               </span>
               <div className="flex flex-wrap gap-1">
-                {["Infrastructure", "Data Analytics", "Software Engineer"].map(
+                {["Software Engineer", "Infrastructure", "Data Analytics"].map(
                   (role, idx) => (
                     <span
                       key={idx}
