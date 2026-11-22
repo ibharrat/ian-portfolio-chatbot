@@ -9,17 +9,9 @@ import { ChatMessage, MessageItem } from "@/components/ChatMessage";
 const INITIAL_WELCOME: MessageItem = {
   id: "welcome-message",
   role: "assistant",
-  content: `Hello! I'm **Ian Bharrat's AI Assistant**.
+  content: `Hello! I'm Ian Bharrat's AI Assistant.
 
-I can answer questions regarding Ian's background, qualifications, and career goals:
-- **Career Aspirations**: Infrastructure, Data Analytics, and Software Engineering (seeking full-time roles starting January 2027).
-- **Cloud Engineering Experience**: Cloud Engineer Intern at Cintas (microservices on GCP, Terraform, GitLab CI/CD, Shared VPCs).
-- **Data Analytics Projects**: Python Movie Data Visualization (Pandas & Matplotlib analysis on 45,000+ movies investigating budget diminishing returns).
-- **Infrastructure as Code**: HashiCorp Packer automated Golden AMI pipeline for Amazon Linux base images.
-- **Academic Honors**: B.S. in Information Technology - Cybersecurity Option at Kean University (3.97 GPA, Phi Kappa Phi).
-- **Certifications**: AWS Certified CloudOps Engineer – Associate, AWS Certified Cloud Practitioner, CompTIA ITF+.
-
-Ask a question below to get started.`,
+I can answer questions regarding Ian's background, qualifications, and career goals.`,
   timestamp: "Just now",
 };
 
@@ -210,17 +202,7 @@ export default function Home() {
             className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 scroll-smooth"
           >
             <div className="max-w-3xl mx-auto space-y-5">
-              {/* Minimal Hero Header if only welcome message */}
-              {messages.length === 1 && (
-                <div className="pt-2 pb-2 text-center space-y-2">
-                  <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#f0e6e9]">
-                    Ian Bharrat — Portfolio Assistant
-                  </h2>
-                  <p className="text-xs sm:text-sm text-[#a8919a] max-w-lg mx-auto leading-relaxed">
-                    Ask about Ian&apos;s cloud engineering experience at Cintas, data analytics projects, education, and career aspirations.
-                  </p>
-                </div>
-              )}
+
 
               {/* Chat Message List */}
               {messages.map((message, index) => {
