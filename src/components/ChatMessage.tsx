@@ -115,7 +115,7 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
               {message.content}
             </ReactMarkdown>
 
-            {isStreaming && <span className="cursor-blink" />}
+            {isStreaming && <span className="cursor-modern" />}
           </div>
         )}
 

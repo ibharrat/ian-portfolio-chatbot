@@ -14,10 +14,12 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
+          '"Helvetica Neue"',
           "Helvetica",
-          "Helvetica Neue",
           "-apple-system",
           "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
           "Arial",
           "sans-serif",
         ],

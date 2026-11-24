@@ -30,7 +30,7 @@ export default function Home() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const typingTickerCancelRef = useRef<(() => void) | null>(null);
-  const introTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const introRafRef = useRef<number | null>(null);
 
   // Auto-scroll logic
   const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
@@ -41,32 +41,43 @@ export default function Home() {
     scrollToBottom("smooth");
   }, [messages, isLoading, isIntroTyping, scrollToBottom]);
 
-  // Smooth typing effect for intro welcome message on load
+  // Smooth 60fps fluid typing effect for intro welcome message
   const startIntroTyping = useCallback(() => {
-    if (introTimerRef.current) clearInterval(introTimerRef.current);
+    if (introRafRef.current) cancelAnimationFrame(introRafRef.current);
     setIsIntroTyping(true);
 
-    let index = 0;
-    introTimerRef.current = setInterval(() => {
-      index++;
-      if (index <= INTRO_TEXT.length) {
-        const text = INTRO_TEXT.slice(0, index);
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === "welcome-message" ? { ...msg, content: text } : msg
-          )
-        );
+    const startTime = performance.now();
+    const charsPerSecond = 46; // fluid, editorial reading cadence
+
+    const frame = (now: number) => {
+      const elapsed = (now - startTime) / 1000;
+      const targetCharCount = Math.min(
+        Math.floor(elapsed * charsPerSecond),
+        INTRO_TEXT.length
+      );
+
+      const currentText = INTRO_TEXT.slice(0, targetCharCount);
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === "welcome-message" ? { ...msg, content: currentText } : msg
+        )
+      );
+
+      if (targetCharCount < INTRO_TEXT.length) {
+        introRafRef.current = requestAnimationFrame(frame);
       } else {
-        if (introTimerRef.current) clearInterval(introTimerRef.current);
+        introRafRef.current = null;
         setIsIntroTyping(false);
       }
-    }, 22);
+    };
+
+    introRafRef.current = requestAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
     startIntroTyping();
     return () => {
-      if (introTimerRef.current) clearInterval(introTimerRef.current);
+      if (introRafRef.current) cancelAnimationFrame(introRafRef.current);
     };
   }, [startIntroTyping]);
 
@@ -97,7 +108,7 @@ export default function Home() {
 
     // If intro was still typing, finish it immediately
     if (isIntroTyping) {
-      if (introTimerRef.current) clearInterval(introTimerRef.current);
+      if (introRafRef.current) cancelAnimationFrame(introRafRef.current);
       setIsIntroTyping(false);
       setMessages((prev) =>
         prev.map((msg) =>
@@ -174,32 +185,46 @@ export default function Home() {
       let displayedLength = 0;
       let streamFinished = false;
       let isCancelled = false;
+      let rafId: number | null = null;
 
-      // Start smooth typewriter ticker
+      // 60fps fluid ease-out typewriter loop
       const typeWriterPromise = new Promise<void>((resolve) => {
-        const tick = () => {
+        let lastTime = performance.now();
+
+        const tick = (now: number) => {
           if (isCancelled) {
             resolve();
             return;
           }
 
-          const queueLength = incomingFullText.length - displayedLength;
+          const elapsedMs = now - lastTime;
 
-          if (queueLength > 0) {
-            // Adaptive speed: smooth typing that naturally keeps up
+          const diff = incomingFullText.length - displayedLength;
+
+          if (diff > 0) {
             let step = 1;
-            if (queueLength > 80) step = 6;
-            else if (queueLength > 40) step = 4;
-            else if (queueLength > 15) step = 2;
+            if (diff > 80) {
+              step = Math.ceil(diff * 0.16);
+            } else if (diff > 30) {
+              step = Math.ceil(diff * 0.12);
+            } else if (diff > 10) {
+              step = Math.ceil(diff * 0.08);
+            } else {
+              // Smooth human typing cadence on small tail (~18ms per char)
+              step = elapsedMs >= 16 ? 1 : 0;
+            }
 
-            displayedLength = Math.min(displayedLength + step, incomingFullText.length);
-            const currentText = incomingFullText.slice(0, displayedLength);
+            if (step > 0) {
+              lastTime = now;
+              displayedLength = Math.min(displayedLength + step, incomingFullText.length);
+              const currentText = incomingFullText.slice(0, displayedLength);
 
-            setMessages((prev) =>
-              prev.map((msg) =>
-                msg.id === assistantId ? { ...msg, content: currentText } : msg
-              )
-            );
+              setMessages((prev) =>
+                prev.map((msg) =>
+                  msg.id === assistantId ? { ...msg, content: currentText } : msg
+                )
+              );
+            }
           }
 
           if (streamFinished && displayedLength >= incomingFullText.length) {
@@ -207,15 +232,15 @@ export default function Home() {
             return;
           }
 
-          const nextDelay = queueLength > 30 ? 12 : 20;
-          setTimeout(tick, nextDelay);
+          rafId = requestAnimationFrame(tick);
         };
 
-        tick();
+        rafId = requestAnimationFrame(tick);
       });
 
       typingTickerCancelRef.current = () => {
         isCancelled = true;
+        if (rafId) cancelAnimationFrame(rafId);
         if (incomingFullText) {
           setMessages((prev) =>
             prev.map((msg) =>
@@ -284,6 +309,9 @@ export default function Home() {
     }
     if (typingTickerCancelRef.current) {
       typingTickerCancelRef.current();
+    }
+    if (introRafRef.current) {
+      cancelAnimationFrame(introRafRef.current);
     }
     setIsLoading(false);
     setMessages([
