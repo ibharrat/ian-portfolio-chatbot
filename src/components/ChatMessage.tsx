@@ -49,7 +49,7 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
         }`}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap leading-relaxed text-[0.93rem]">
+          <p className="whitespace-pre-wrap leading-relaxed text-[0.93rem] font-medium tracking-tight">
             {message.content}
           </p>
         ) : (
